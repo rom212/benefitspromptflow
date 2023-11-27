@@ -5,14 +5,72 @@
       "type": "llm",
       "inputs": {
         "question": {
-          "type": ["string"]
+          "type": [
+            "string"
+          ]
         },
         "chat_history": {
-          "type": ["string"]
+          "type": [
+            "string"
+          ]
         }
       },
       "description": "Chat with Chatbot",
       "is_builtin": false
+    },
+    "retrieve_chunks.py": {
+      "type": "python",
+      "inputs": {
+        "question": {
+          "type": [
+            "string"
+          ]
+        },
+        "index_name": {
+          "type": [
+            "string"
+          ]
+        },
+        "search": {
+          "type": [
+            "CognitiveSearchConnection"
+          ]
+        }
+      },
+      "source": "retrieve_chunks.py",
+      "function": "retrieve_documentation"
+    },
+    "prompt_node_xiv7.jinja2": {
+      "type": "prompt",
+      "inputs": {
+        "chunks": {
+          "type": [
+            "string"
+          ]
+        }
+      },
+      "source": "prompt_node_xiv7.jinja2"
+    },
+    "llm_node_47iu.jinja2": {
+      "type": "llm",
+      "inputs": {
+        "instructions": {
+          "type": [
+            "string"
+          ]
+        },
+        "chat_history": {
+          "type": [
+            "string"
+          ]
+        },
+        "question": {
+          "type": [
+            "string"
+          ]
+        }
+      },
+      "source": "llm_node_47iu.jinja2"
     }
   }
 }

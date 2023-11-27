@@ -1,3 +1,7 @@
+id: template_chat_flow
+name: Template Chat Flow
+environment:
+  python_requirements_txt: requirements.txt
 inputs:
   chat_history:
     type: list
@@ -8,24 +12,34 @@ inputs:
 outputs:
   answer:
     type: string
-    reference: ${chat.output}
+    reference: ${llm_node_47iu.output}
     is_chat_output: true
 nodes:
-- name: chat
+- name: retrieve_chunks
+  type: python
+  source:
+    type: code
+    path: retrieve_chunks.py
+  inputs:
+    search: demo
+    question: ${inputs.question}
+    index_name: vector-1701096467624
+- name: prompt_node_xiv7
+  type: prompt
+  source:
+    type: code
+    path: prompt_node_xiv7.jinja2
+  inputs:
+    chunks: ${retrieve_chunks.output}
+- name: llm_node_47iu
   type: llm
   source:
     type: code
-    path: chat.jinja2
+    path: llm_node_47iu.jinja2
   inputs:
-    deployment_name: ''
-    max_tokens: '256'
-    temperature: '0.7'
-    chat_history: ${inputs.chat_history}
+    deployment_name: gpt-35-turbo
+    instructions: ${prompt_node_xiv7.output}
     question: ${inputs.question}
+    chat_history: ${inputs.chat_history}
+  connection: AOAI
   api: chat
-  provider: AzureOpenAI
-  connection: ''
-id: template_chat_flow
-name: Template Chat Flow
-environment:
-    python_requirements_txt: requirements.txt

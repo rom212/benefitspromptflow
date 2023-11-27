@@ -1,1 +1,3 @@
 .venv/
+.promptflow/
+__pycache__/
