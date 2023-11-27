@@ -1,0 +1,18 @@
+{
+  "package": {},
+  "code": {
+    "chat.jinja2": {
+      "type": "llm",
+      "inputs": {
+        "question": {
+          "type": ["string"]
+        },
+        "chat_history": {
+          "type": ["string"]
+        }
+      },
+      "description": "Chat with Chatbot",
+      "is_builtin": false
+    }
+  }
+}
