@@ -24,6 +24,9 @@ nodes:
     search: demo
     question: ${inputs.question}
     index_name: vector-1701096467624
+    embedding: ${Embedding_x4lj.output}
+    full_text_search: true
+    vector_search: true
 - name: prompt_node_xiv7
   type: prompt
   source:
@@ -43,3 +46,12 @@ nodes:
     chat_history: ${inputs.chat_history}
   connection: AOAI
   api: chat
+- name: Embedding_x4lj
+  type: python
+  source:
+    type: package
+    tool: promptflow.tools.embedding.embedding
+  inputs:
+    connection: AOAI
+    deployment_name: text-embedding-ada-002
+    input: ${inputs.question}
