@@ -7,6 +7,10 @@ from promptflow.connections import CognitiveSearchConnection
 
 @tool
 def retrieve_documentation(question: str, index_name: str, embedding: List[float], search: CognitiveSearchConnection, full_text_search: bool, vector_search: bool) -> str:
+  print("TEXT SEARCH: ", full_text_search)
+
+  if (not full_text_search and not vector_search):
+    print("It is recommend to use either full text or vector search if not both.")
   
   search_client = SearchClient(endpoint=search.api_base, 
                                 index_name=index_name, 
